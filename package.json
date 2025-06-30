@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^7.4.0",
     "i18next": "^25.2.1",
     "next": "15.3.4",
     "next-i18next": "^15.4.2",
