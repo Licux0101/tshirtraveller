@@ -5,9 +5,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-08-16',
 })
 
+interface CheckoutItem {
+  name: string
+  price: number
+  quantity: number
+}
+
 export async function POST(req: Request) {
   try {
-    const { items } = await req.json()
+    const { items }: { items: CheckoutItem[] } = await req.json()
 
     if (!items || !Array.isArray(items)) {
       return NextResponse.json({ error: 'Items inválidos' }, { status: 400 })
@@ -16,7 +22,7 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      line_items: items.map((item: any) => ({
+      line_items: items.map((item) => ({
         price_data: {
           currency: 'eur',
           product_data: {
