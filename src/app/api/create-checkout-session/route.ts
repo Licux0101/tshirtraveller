@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil',
-} as any)
+})
 
 interface CheckoutItem {
   name: string
