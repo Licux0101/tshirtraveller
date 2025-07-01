@@ -1,9 +1,9 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
-const stripe = new Stripe('', {
-  apiKey: process.env.STRIPE_SECRET_KEY!,
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil',
-})
+} as any) // <- forzamos el tipo temporalmente
 
 
 
