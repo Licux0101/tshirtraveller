@@ -3,9 +3,7 @@ import { NextResponse } from 'next/server'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-05-28.basil',
-} as any) // <- forzamos el tipo temporalmente
-
-
+} as any) // forzamos el tipo temporalmente
 
 interface CheckoutItem {
   name: string
@@ -24,7 +22,7 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      line_items: items.map((item) => ({
+      line_items: items.map((item: CheckoutItem) => ({
         price_data: {
           currency: 'eur',
           product_data: {
