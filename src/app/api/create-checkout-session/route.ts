@@ -1,9 +1,8 @@
 import Stripe from 'stripe'
 import { NextResponse } from 'next/server'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-05-28.basil',
+  apiVersion: '2023-08-16',
 })
 
 interface CheckoutItem {
@@ -23,7 +22,7 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
-      line_items: items.map((item: CheckoutItem) => ({
+      line_items: items.map((item) => ({
         price_data: {
           currency: 'eur',
           product_data: {
